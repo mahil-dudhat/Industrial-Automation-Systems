@@ -1,5 +1,102 @@
 # OT-Network-Protocols
 ### I will be using this Repo to document and share Network Protocols that I will be studying and practicing. The focus will be on discussing Operation Technology (OT) Related Network Protocol.
+# A Guide to Operational Technology (OT) Network Protocols
+
+This document serves as a reference guide to many of the common network protocols encountered in Operational Technology (OT) and Industrial Control System (ICS) environments. Understanding these protocols, their vendors, transport layers, and default ports is crucial for network design, security monitoring, and firewall configuration.
+
+> ### ⚠️ A Note on Common Ports
+> You will notice that certain port numbers appear frequently. This is often because systems support common protocols for interoperability, even if their primary, proprietary protocol uses a different port.
+> * **TCP/502:** The registered port for **Modbus**. Many systems support Modbus for broad compatibility.
+> * **TCP/102:** The port for ISO-TSAP, famously used by **Siemens S7Comm**.
+> * **UDP/161:** The standard port for **SNMP**, which is widely used for network device monitoring and discovery.
+> * **TCP/UDP/44818:** The port for **EtherNet/IP** and **CIP**, common in Rockwell Automation environments.
+
+---
+
+## Foundational & Widely-Used OT Protocols
+
+These protocols are foundational to industrial communication and are supported by a wide range of vendors.
+
+| Protocol | Vendor(s) | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Modbus** | Schneider (Origin), Multi-Vendor | TCP | `502` | One of the oldest and most widely used protocols due to its simplicity. |
+| **S7Comm / S7Comm Plus** | Siemens | TCP | `102` | Used for communication with Siemens SIMATIC S7 series PLCs. |
+| **EtherNet/IP (ENIP)** | Rockwell / ODVA | TCP & UDP | `44818` | Adapts the Common Industrial Protocol (CIP) for Ethernet. |
+| **DNP3** | Multi-Vendor | TCP, UDP | `20000` | Common in utilities (electric, water) for SCADA communication. |
+| **OPC-DA** | Multi-Vendor | TCP | `135` | Legacy standard using DCOM. Uses dynamic high ports after initial connection. |
+| **OPC-UA** | Multi-Vendor | TCP | `4840`, `4843` | The modern, secure, and platform-independent successor to OPC-DA. |
+
+---
+
+## Vendor-Specific Protocols
+
+This section lists protocols primarily associated with a single major vendor.
+
+### Siemens
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **PROFINET DCP** | UDP | `34962` | Discovery and Configuration Protocol. |
+| **PROFINET Real-Time**| Ethernet | N/A | Operates at Layer 2 for deterministic performance; does not use IP/UDP ports. |
+| **GOOSE** | Ethernet | N/A | IEC-61850 protocol for substation automation. Layer 2, no ports. |
+| **DIGSI 4 / 5** | TCP | `502` | Engineering software for SIPROTEC relays; often uses Modbus for comms. |
+
+### Rockwell Automation (Allen-Bradley)
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **CIP (Control & Info)** | TCP | `44818` | The core protocol for EtherNet/IP (explicit messaging). |
+| **PCCC** | TCP | `44818` | Legacy protocol, often encapsulated within CIP for older PLCs. |
+| **FactoryTalk RNA** | UDP | `2222` | Used for Rockwell Network Agent services. |
+
+### Schneider Electric
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **Modbus Schneider** | TCP | `502` | Schneider's implementation of the Modbus protocol. |
+| **Triconex TSAA** | TCP | `102` | Protocol for Triconex safety instrumented systems. |
+| **PowerLogic Discovery** | TCP | `102` | Used for discovering PowerLogic energy meters. |
+
+### ABB
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **Totalflow** | TCP | `502` | Protocol for ABB's line of flow computers. |
+| **RNRP** | TCP | `102` | Redundant Network Routing Protocol. |
+| **Symphony Plus** | TCP | `102` | Protocol for ABB's Symphony Plus DCS. |
+
+### Emerson
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **DeltaV** | TCP | `502` | Internal protocols for the DeltaV DCS; supports Modbus. |
+| **Ovation** | TCP | `102` | Suite of protocols for the Ovation DCS. |
+| **ROC Plus** | TCP | `102` | For Remote Operations Controller (ROC) family. |
+
+### General Electric (GE)
+
+| Protocol/System | Transport | Port(s) | Notes |
+| :--- | :--- | :--- | :--- |
+| **GE SRTP** | UDP | `161` | Service Request Transfer Protocol, often used with SNMP. |
+| **GE-EGD** | UDP | `34962` | Ethernet Global Data, for high-speed data exchange between PLCs. |
+| **GE SDI (MarkVie)** | TCP | `502` | For communication with MarkVie turbine control systems. |
+
+---
+
+## Network Management, IT, & Utility Protocols
+
+These protocols support the underlying network infrastructure and are often found in both IT and OT environments.
+
+| Protocol | Transport | Port(s) | Use Case in OT |
+| :--- | :--- | :--- | :--- |
+| **SNMP** | UDP | `161`, `162` | Monitoring network devices (switches, routers, firewalls). |
+| **LLDP / CDP** | Ethernet | N/A | Layer 2 discovery protocols for mapping network topology. |
+| **FTP / TFTP** | TCP / UDP | `20`,`21` / `69` | Transferring firmware, configurations, and project files. |
+| **SSH / Telnet** | TCP | `22` / `23` | Secure/insecure command-line access to devices. |
+| **HTTP / HTTPS** | TCP | `80` / `443`| Accessing embedded web interfaces on modern devices. |
+| **RDP** | TCP | `3389` | Remote access to Windows-based HMIs and engineering stations. |
+| **DHCP** | UDP | `67`, `68` | Dynamic IP address assignment (use with caution in OT). |
+| **NTP** | UDP | `123` | Time synchronization, critical for sequence-of-events analysis. |
 
 ## OT Network Protocols
 | Protocol/System                             | Vendor         | Transport Layer Protocol | Port Number(s) |
