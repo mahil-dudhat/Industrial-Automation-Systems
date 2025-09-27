@@ -2,7 +2,6 @@
 ### I will be using this Repo to document and share Network Protocols that I will be studying and practicing. The focus will be on discussing Operation Technology (OT) Related Network Protocol.
 # A Guide to Operational Technology (OT) Network Protocols
 
-This document serves as a reference guide to many of the common network protocols encountered in Operational Technology (OT) and Industrial Control System (ICS) environments. Understanding these protocols, their vendors, transport layers, and default ports is crucial for network design, security monitoring, and firewall configuration.
 
 > ### ⚠️ A Note on Common Ports
 > You will notice that certain port numbers appear frequently. This is often because systems support common protocols for interoperability, even if their primary, proprietary protocol uses a different port.
